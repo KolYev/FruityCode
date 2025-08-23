@@ -1,0 +1,887 @@
+/* код для structure.html */
+
+/* Общие стили для светлого и тёмного режима */
+body {
+    background-color: #f5f6fa;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #101523;
+    color: #e0e0e0;
+}
+
+body.dark-mode p, body.dark-mode span{
+    color: white;
+}
+
+body.dark-mode img.no-dark-mode {
+    filter: invert(1) grayscale(0.5);
+}
+
+.file-search, .elements, .settings {
+    background-color: #191e30;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode .file-search, 
+body.dark-mode .elements,
+body.dark-mode .settings {
+    background-color: rgb(25, 30, 48);
+}
+
+body.dark-mode .form-control, body.dark-mode .input-group-text {
+    background-color: #30364c;
+}
+
+body.dark-mode .folder-list .nested.active {
+    border-left: solid rgb(55, 59, 75);
+}
+
+body.dark-mode .folder-list .arrow {
+    margin-left: auto;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+}
+
+body.dark-mode .folder-list .arrow-down {
+    transform: rotate(225deg);
+}
+
+body.dark-mode .line {
+    border-bottom: 1px solid rgb(55, 59, 75);
+}
+
+body.dark-mode .directory .folder, 
+body.dark-mode .directory .compiler, 
+body.dark-mode .directory .compiler-result, 
+body.dark-mode .directory .test, 
+body.dark-mode .directory .test-result {
+    background-color: transparent;
+}
+
+body.dark-mode .folder:hover,
+body.dark-mode .compiler:hover,
+body.dark-mode .compiler-result:hover,
+body.dark-mode .test:hover,
+body.dark-mode .test-result:hover {
+    transform: scale(1.05);
+    background-color: rgb(55, 59, 75);
+}
+
+
+body.dark-mode .vector-arrow {
+    border-left: 2px solid rgb(180, 180, 180);
+    border-bottom: 2px solid rgb(180, 180, 180);
+}
+
+body.dark-mode .add-element>button:hover {
+    background-color: transparent;
+}
+
+body.dark-mode .add-element>button:hover>p {
+    color: white;
+}
+
+body.dark-mode .code-area, body.dark-mode .description-area {
+    background-color: transparent;
+    color: white;
+}
+
+body.dark-mode .dropdown-toggle {
+    background-color: #30364c;
+    color: white;
+}
+
+body.dark-mode .numbers,
+body.dark-mode .question-area {
+    background-color: #30364c;
+    color: white;
+}
+
+.grey {
+    color: #969696;
+}
+
+body.dark-mode .grey {
+    color: #888;
+}
+
+/* Переключатель */
+.settings {
+    position: relative;
+}
+
+.settings button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.settings button:hover {
+    transform: scale(1.05);
+}
+
+.settings button:active {
+    background-color: #d0d0d0;
+    transform: scale(0.95);
+}
+
+/* Общие стили для светлого и тёмного режима (конец) */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body,
+html {
+    height: 100%;
+    overflow: hidden;
+    background-color: #f5f6fa;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Главный контейнер */
+.main-container {
+    padding: 24px;
+    display: flex;
+    height: 100%;
+    margin: 0 auto;
+}
+
+/* поиск по файлам (начало) */
+
+.arrow-intr {
+    display: flex;
+}
+
+.file-search {
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    width: 280px;
+    margin-right: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transition: width 0.3s ease, height 0.3s ease, padding 0.3s ease;
+}
+
+.file-search.collapsed {
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    padding: 0;
+    transition: width 0.3s ease, height 0.3s ease, padding 0.3s ease;
+    position: relative;
+}
+
+.file-search.collapsed .toggle, 
+.file-search.collapsed .introduction, 
+.file-search.collapsed .input-group, 
+.file-search.collapsed .folder-list, 
+.file-search.collapsed .line, 
+.file-search.collapsed .go-out,
+
+.file-search.collapsed .new-compile,
+.file-search.collapsed .description,
+.file-search.collapsed .dropdown,
+.file-search.collapsed .unique-link,
+.file-search.collapsed .create,
+
+.file-search.collapsed .new-test{
+    display: none;
+}
+
+.file-search.collapsed .vector-arrow {
+    transform: rotate(-135deg);
+    margin: auto;
+    margin-top: 25px;
+}
+
+.file-search.collapsed .vector-arrow:hover {
+    transform: rotate(-45deg) scale(1.1);
+    filter: brightness(1.2);
+}
+
+.file-search.collapsed .vector-arrow:active {
+    transform: rotate(-45deg) scale(0.9);
+    filter: brightness(0.8);
+}
+
+/* Общее состояние для плавного перехода всех дочерних элементов */
+.file-search .toggle, 
+.file-search .introduction, 
+.file-search .input-group, 
+.file-search .folder-list, 
+.file-search .line, 
+.file-search .go-out,
+
+.file-search.collapsed .new-compile,
+.file-search.collapsed .description,
+.file-search.collapsed .dropdown,
+.file-search.collapsed .unique-link,
+.file-search.collapsed .create,
+
+.file-search.collapsed .new-test{
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.file-search.collapsed .toggle, 
+.file-search.collapsed .introduction, 
+.file-search.collapsed .input-group, 
+.file-search.collapsed .folder-list, 
+.file-search.collapsed .line, 
+.file-search.collapsed .go-out,
+
+.file-search.collapsed .new-compile,
+.file-search.collapsed .description,
+.file-search.collapsed .dropdown,
+.file-search.collapsed .unique-link,
+.file-search.collapsed .create,
+
+.file-search.collapsed .new-test{
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+
+.file-search::-webkit-scrollbar {
+    width: 8px;
+}
+
+.file-search::-webkit-scrollbar-thumb {
+    background-color: rgb(141, 147, 165);
+    border-radius: 4px;
+}
+
+.file-search::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(100, 104, 120);
+}
+
+.file-search::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.file-search {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(141, 147, 165) transparent;
+}
+
+.introduction {
+    display: flex;
+    justify-content: space-between;
+}
+
+.username {
+    display: flex;
+}
+
+.fruity-code {
+    cursor: pointer;
+}
+
+.fruity-code a {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 20;
+    text-decoration: none;
+}
+
+.brand-fruity {
+    font-weight: bold;
+    color: #1c274c;
+}
+
+.brand-code {
+    font-weight: bold;
+    color: black;
+}
+
+.go-out {
+    cursor: pointer;
+    padding-left: 70px;
+    padding-top: 9.5px;
+    padding-bottom: 9.5px;
+}
+
+.go-out a {
+    text-decoration: none;
+    color: black;
+}
+
+.go-out span {
+    padding-right: 8px;
+}
+
+.input-group-text,
+.form-control {
+    border: none;
+    background-color: #f5f6fa;
+}
+
+.folder-list {
+    margin-top: 20px;
+}
+
+.folder-list img {
+    height: 20px;
+}
+
+.folder-list ul {
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.folder-list ul ul {
+    display: none;
+}
+
+.folder-list .toggle {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.folder-list .toggle img {
+    margin-right: 8px;
+}
+
+.folder-list .arrow {
+    margin-left: auto;
+    border: solid rgb(141, 147, 165);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.folder-list .arrow-down {
+    transform: rotate(225deg);
+}
+
+.folder-list span {
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.folder-list span img {
+    margin-right: 8px;
+}
+
+.folder-list .nested.active {
+    display: block;
+    border-left: solid rgb(141, 147, 165);
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+}
+
+/* поиск по файлам (конец) */
+
+/* папка в, которой ты находишься (начало) */
+.file-search.collapsed ~ .elements {
+    width: 1250px;
+    transition: width 0.3s ease;
+}
+
+.elements {
+    background-color: #ffffff;
+    width: 1000px;
+    height: 100%;
+    border-radius: 15px;
+    transition: width 0.3s ease;
+}
+
+.container {
+    height: 100%;
+    padding: 20px;
+}
+
+.location {
+    display: flex;
+    justify-content: space-between;
+}
+
+.base {
+    display: flex;
+    height: 33px;
+}
+
+.vector {
+    cursor: pointer;
+    padding: 12px 12px 12px 0;
+    height: 45px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.vector:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.vector:active {
+    transform: scale(0.9);
+    filter: brightness(0.8);
+}
+
+.base>.path {
+    padding-right: 8px;
+    height: 40px;
+}
+
+.my-location {
+    height: 33px;
+}
+
+.my-location p,
+.my-location h5 {
+    margin: 0;
+    padding: 0;
+}
+
+/* линия (начало) */
+.line {
+    border-bottom: 1px solid #ebebeb;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* линия (конец) */
+
+/* Добавить элемент (начало) */
+
+.add-element>button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.add-element>button:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.add-element>button:active {
+    background-color: #d0d0d0;
+    transform: scale(0.95);
+}
+
+.add-element>button>img {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    transition: transform 0.2s ease;
+}
+
+.add-element>button>p {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 0.5px;
+    padding-right: 0.5px;
+    margin: 0;
+    transition: color 0.2s ease;
+}
+
+.add-element>button:hover>p {
+    color: #555;
+}
+
+.add-element>button:active>p {
+    color: #333;
+}
+
+/* Добавить элемент (конец) */
+
+/* папка в, которой ты находишься (конец) */
+
+/* Рабочая директория (начало) */
+
+.directory {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.directory>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.directory>div>p {
+    padding: 0;
+    margin: 0;
+}
+
+.compiler a, .compiler-result a, .test a, .test-result a{
+    text-decoration: none;
+    color: black;
+}
+
+.folder,
+.compiler,
+.compiler-result,
+.test,
+.test-result {
+    width: 96px;
+    height: 110px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Анимация при наведении и нажатии (начало) */
+.folder img,
+.compiler img,
+.compiler-result img,
+.test img,
+.test-result img {
+    transition: transform 0.2s ease;
+}
+
+.folder:hover,
+.compiler:hover,
+.compiler-result:hover,
+.test:hover,
+.test-result:hover {
+    transform: scale(1.05);
+    background-color: #f0f0f0;
+}
+
+.folder:active,
+.compiler:active,
+.compiler-result:active,
+.test:active,
+.test-result:active {
+    transform: scale(0.95);
+}
+
+.fruity-code,
+.go-out,
+.settings {
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fruity-code:hover {
+    transform: scale(1.1);
+}
+
+.go-out:hover {
+    transform: scale(1.1);
+}
+
+.settings:hover {
+    transform: scale(1.1);
+}
+
+.fruity-code:active,
+.go-out:active,
+.settings:active {
+    transform: scale(0.95);
+}
+
+.vector-arrow {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid rgb(141, 147, 165);
+    border-bottom: 2px solid rgb(141, 147, 165);
+    transform: rotate(45deg);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-top: 20px;
+}
+
+.vector-arrow:hover {
+    transform: rotate(45deg) scale(1.1);
+    filter: brightness(1.2);
+}
+
+.vector-arrow:active {
+    transform: rotate(45deg) scale(0.9);
+    filter: brightness(0.8);
+}
+
+
+/* Анимация при наведении и нажатии (конец) */
+
+.grey {
+    color: #969696;
+}
+
+/* контекстное меню (начало) */
+
+.context-menu {
+    position: absolute;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    border: none;
+}
+
+.context-menu .list-group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.context-menu .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.context-menu .list-group-item:hover {
+    background-color: #f0f0f0;
+}
+
+.context-menu .list-group-item p {
+    padding: 0;
+    margin: 0;
+}
+
+.context-menu .list-group-item img {
+    height: 20px;
+}
+
+/* контекстное меню (конец) */
+
+
+/* Настройки (начало) */
+
+.settings {
+    width: 57px;
+    height: 57px;
+    margin-left: 24px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    align-items: center;    
+}
+
+.settings button {
+    width: 100%; 
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    display: flex;           
+    justify-content: center; 
+    align-items: center;
+}
+
+.settings img {
+    max-width: 100%; 
+    max-height: 100%;
+}
+
+/* Рабочая директория (конец) */
+
+/* код для compiler.html */
+
+.new-compile, .new-test {
+    display: flex;
+}
+
+.new-compile img, .new-test img{
+    width: 27px;
+}
+
+.new-compile p, .new-test p {
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+.description {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.description-area {
+    width: 100%;
+    height: 225px;
+    border: none;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    overflow: hidden; 
+    margin-top: 20px;
+    overflow-y: auto;
+}
+
+
+.dropdown {
+    margin-right: 100%;
+}
+
+.second-dropdown {
+    margin-top: 20px;
+}
+
+.create {
+    color: white;
+    border: none;
+    height: 43px;
+    width: 100%;
+    border-radius: 15px;
+    background-color: #1c274c;
+}
+
+.create:hover,
+.create:focus {
+    background-color: #27478f;
+    transform: scale(1.05);
+}
+
+.btn {
+    background-color: #f5f6fa;
+    border: none;
+    color: black; 
+    width: 225px;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: #f5f6fa;
+    color: black; 
+}
+
+.dropdown-menu {
+    width: 225px;
+    background-color: #f5f6fa;
+}
+
+.dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-item {
+    color: black;
+}
+
+.buttons {
+    display: flex;
+}
+
+.unique-link {
+    margin-top: 20px;
+    width: 225px;
+}
+
+.file-search .grey{
+    font-weight: 12;
+    white-space: nowrap;
+}
+
+.code-editor {
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.line-numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    color: #888;
+    text-align: right;
+    padding: 10px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    border-right: 1px solid #ddd;
+    user-select: none;
+}
+
+.code-area {
+    width: calc(100% - 40px);
+    height: 100%;
+    border: none;
+    padding: 10px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    overflow: hidden; 
+    margin-left: 40px;
+}
+
+
+/* код для test.html */
+
+.question-list {
+    border-radius: 15px;
+}
+
+.enter-question {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    border-radius: 15px;
+}
+
+
+.numbers {
+    background-color: #f5f6fa;
+    color: #888;
+    text-align: right;
+    padding-top: 5px;
+    height: 35px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    user-select: none;
+}
+
+.question-area {
+    background-color: #f5f6fa;
+    width: calc(100% - 40px);
+    border: none;
+    height: 35px;
+    padding: 5px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    overflow: hidden;
+}

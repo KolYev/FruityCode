@@ -1,0 +1,217 @@
+/* header and footer start */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body {
+    font-family: "IBM Plex Mono", monospace;
+}
+
+.main-container {
+    padding-right: 120px;
+    padding-left: 120px;
+}
+
+.fruity-code {
+    display: flex;
+}
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: #27478f;
+    transform: scale(1.05);
+}
+
+.brand-fruity {
+    font-weight: bold;
+    color: #1c274c;
+}
+
+.brand-code {
+    font-weight: bold;
+}
+
+.navbar-nav {
+    padding-left: 32px;
+}
+
+#motivation {
+    width: 210px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: #27478f;
+    transform: scale(1.05);
+}
+
+.login {
+    border: none;
+    width: 86px;
+    border-radius: 15px;
+    background-color: #1c274c;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.login:hover,
+.login:focus {
+    background-color: #27478f;
+    transform: scale(1.05);
+}
+
+#login {
+    color: #f5f6fa;
+}
+
+/* header and footer end */
+
+/* section 1 start */
+
+.run-code {
+    display: flex;
+}
+
+h1 {
+    padding-bottom: 20px;
+}
+
+.compiler-example {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.python-code {
+    margin-left: 48px;
+    margin-right: 230px;
+}
+
+.code {
+    background-color: #f5f6fa;
+    width: 420px;
+    border-radius: 15px;
+}
+
+.violet {
+    color: #7f0a8f;
+}
+
+.blue {
+    color: #3050c2;
+}
+
+.black {
+    color: #06080f;
+}
+
+.orange {
+    color: #ff8800;
+}
+
+.green {
+    color: #1d9744;
+}
+
+.grey {
+    color: #969696;
+}
+
+.tab {
+    margin-left: 50px;
+}
+
+code p {
+    margin: 0;
+    padding: 0;
+}
+
+.start {
+    margin-top: 40px;
+    color: #f5f6fa;
+    text-decoration: none;
+    border: none;
+    width: 144px;
+    height: 55px;
+    border-radius: 15px;
+    background-color: #1c274c;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.start:hover,
+.start:focus {
+    background-color: #27478f;
+    transform: scale(1.05);
+}
+
+.col {
+    padding-bottom: 40px;
+    padding-right: 40px;
+}
+
+.fruits {
+    display: flex;
+}
+
+/* section 1 end */
+
+/* section 2 start */
+
+.runners {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.compilers {
+    margin-top: 20px;
+}
+
+.selection-text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.compilers .col-sm-2 {
+    flex: 1 1 20%;
+    max-width: 20%;
+    margin-bottom: 12px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #f5f6fa;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.card:hover,
+.card:focus {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.card-body>a {
+    color: #1c274c;
+    text-decoration: none;
+}
+
+.card-body>a>p {
+    text-align: right;
+}
+
+/* section 2 end */
+
+/* section 3 start */
+
+.for-each {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* section 3 end */
