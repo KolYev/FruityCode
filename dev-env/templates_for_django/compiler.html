@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="source/styles/structure-tree.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="file-search">
+            <div class="arrow-intr">
+                <div class="vector-arrow"></div>
+                <div class="introduction">
+                    <div class="username">
+                        <div class="fruity-code">
+                            <a href="index.html">
+                                <span class="brand-fruity">Fruity</span>
+                                <br>
+                                <span class="brand-code">Code</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="go-out">
+                        <a href="index.html"><span>UserName</span><img class="no-dark-mode" src="source/images/upload.png" alt="upload"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="new-compile">
+                <img class="no-dark-mode" src="source/images/elemets/compiler.png" alt="compiler">
+                <p>New Compile</p>
+            </div>
+
+            <div class="description">
+                <textarea class="description-area" placeholder="Описание не указано"></textarea>
+            </div>
+            <div class="dropdown">
+                <p class="grey">Расположение:</p>
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Расположение папки
+                </button>
+                <ul class="dropdown-menu dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Structure Tree</a></li>
+                    <li><a class="dropdown-item" href="#">Structure Tree/Folder Name</a></li>
+                </ul>
+            </div>
+            <div class="dropdown second-dropdown">
+                <p class="grey">Язык программирования:</p>
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Programming Language
+                </button>
+                <ul class="dropdown-menu dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Python</a></li>
+                    <li><a class="dropdown-item" href="#">C</a></li>
+                </ul>
+            </div>
+            <div class="unique-link">
+                <p class="grey">
+                    Уникальная ссылка
+                </p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Уникальная ссылка">
+                  </div>
+            </div>
+            <button class="create">
+                Сохранить изменения
+              </button>
+        </div>
+        <div class="elements">
+            <div class="container">
+                <h6>Компилятор</h6>
+                <div class="code-editor">
+                    <div class="line-numbers"></div>
+                    <textarea class="code-area" placeholder="Empty Field"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="settings">
+            <button id="theme-toggle">
+                <img class="no-dark-mode" src="source/images/settings.png" alt="settings">
+            </button>
+        </div>
+    </div>
+
+    <script src="source/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toggles = document.querySelectorAll('.toggle');
+            toggles.forEach(function (toggle) {
+                toggle.addEventListener('click', function () {
+                    this.parentElement.querySelector('.nested').classList.toggle('active');
+                    this.classList.toggle('caret-down');
+                    this.querySelector('.arrow').classList.toggle('arrow-down');
+                });
+            });
+
+            var vectorArrow = document.querySelector('.vector-arrow');
+            var fileSearch = document.querySelector('.file-search');
+
+            vectorArrow.addEventListener('click', function () {
+                fileSearch.classList.toggle('collapsed');
+            });
+
+            var codeArea = document.querySelector('.code-area');
+            var lineNumbers = document.querySelector('.line-numbers');
+
+            function updateLineNumbers() {
+                var numberOfLines = codeArea.value.split('\n').length;
+                var lineNumbersHtml = '';
+                for (var i = 1; i <= numberOfLines; i++) {
+                    lineNumbersHtml += i + '<br>';
+                }
+                lineNumbers.innerHTML = lineNumbersHtml;
+            }
+
+            codeArea.addEventListener('input', updateLineNumbers);
+            codeArea.addEventListener('scroll', function () {
+                lineNumbers.scrollTop = codeArea.scrollTop;
+            });
+
+            updateLineNumbers();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var codeArea = document.querySelector('.code-area');
+            var lineNumbers = document.querySelector('.line-numbers');
+
+            function updateLineNumbers() {
+                var numberOfLines = codeArea.value.split('\n').length;
+                var lineNumbersHtml = '';
+                for (var i = 1; i <= numberOfLines; i++) {
+                    lineNumbersHtml += i + '<br>';
+                }
+                lineNumbers.innerHTML = lineNumbersHtml;
+            }
+
+            function autoResize() {
+                codeArea.style.height = 'auto'; // Сбросить высоту, чтобы она не была фиксированной
+                codeArea.style.height = codeArea.scrollHeight + 'px'; // Установить новую высоту
+            }
+
+            codeArea.addEventListener('input', function () {
+                autoResize();
+                updateLineNumbers();
+            });
+
+            codeArea.addEventListener('scroll', function () {
+                lineNumbers.scrollTop = codeArea.scrollTop;
+            });
+
+            autoResize();
+            updateLineNumbers();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggleButton = document.getElementById('theme-toggle');
+    
+            // Проверяем сохранённую тему из localStorage
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+    
+            themeToggleButton.addEventListener('click', function () {
+                document.body.classList.toggle('dark-mode');
+                
+                // Сохраняем выбранную тему в localStorage
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

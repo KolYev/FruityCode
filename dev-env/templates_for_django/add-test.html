@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="source/styles/modal.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="add-folder">
+    <div class="card" style="width: 400px;">
+      <div class="card-body">
+        <div class="auth-text">
+          <h5 class="card-title">Добавление теста</h5> <span class="cross"><a class="dark-blue"
+              href="index.html">&#x2715</a></span>
+        </div>
+        <div class="line"></div>
+        <div class="dropdown">
+          <p class="grey">Расположение:</p>
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Расположение теста
+          </button>
+          <ul class="dropdown-menu dropdown-menu">
+            <li><a class="dropdown-item" href="#">Structure Tree</a></li>
+            <li><a class="dropdown-item" href="#">Structure Tree/Folder Name</a></li>
+          </ul>
+        </div>
+        <p class="grey name">Название:</p>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="New Test" aria-label="Username">
+        </div>
+        <div class="buttons">
+          <button class="cancel">
+            <a class="nav-link grey" href="add-element.html">Отменить</a>
+          </button>
+          <button class="create">
+            <a class="nav-link active" href="structure-tree.html">Создать</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="source/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="source/javascript/login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="source/styles/modal.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="authorization">
+        <div class="card" style="width: 400px;">
+            <div class="card-body">
+              <div class="auth-text">
+                  <h5 class="card-title">Восстановление пароля</h5> <span class="cross"><a class="dark-blue" href="index.html">&#x2715</a></span>
+              </div>
+              <div class="line"></div>
+              <div class="form-floating mb-1">
+                <input class="form-control" name="login" id="login" value="" placeholder="Логин" required>
+                <label for="login" class="form-label">Логин</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                <label for="email" class="form-label">Email</label>
+              </div>
+              <div class="password">
+                <div class="form-floating mb-1 password">
+                  <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
+                  <label for="password" class="form-label">Пароль</label>
+                  <span class="password-control" id="toggle-password"></span>
+                </div>
+              </div>
+              <div class="password">
+                <div class="form-floating mb-1 password">
+                  <input type="password" class="form-control" name="repeat-password" id="repeat-password" value="" placeholder="Повторите пароль" required>
+                  <label for="repeat-password" class="form-label">Повторите пароль</label>
+                  <span class="password-control"></span>
+                </div>
+              </div>
+              <button class="enter">
+                <a class="nav-link active" href="login.html">Зарегистрироваться</a>
+            </button>
+            <p><span class="grey">Уже есть аккаунт?</span> <span><a class="dark-blue" href="login.html">Войдите</a></span></p>
+            </div>
+          </div>
+    </div>
+
+    <script src="source/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="source/javascript/login.js"></script>
+</body>
+
+</html>
